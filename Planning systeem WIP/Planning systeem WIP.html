@@ -1,55 +1,9 @@
-<html>
+<html lang="nl-NL">
   <head>
     <title>Planning systeem</title>
+    <link rel="stylesheet" type="text/css" href="planning systeem.css" />
   </head>
   <body>
-    <style>
-      body {
-        background-color: #ffffff;
-      }
-
-      .rectangle {
-        height: 110px;
-        width: 1920px;
-        background-color: #000000;
-        position: relative;
-        top: -10px;
-        left: -10px;
-      }
-
-      .circle {
-        height: 70px;
-        width: 70px;
-        background-color: #949494;
-        border-radius: 50%;
-        position: relative;
-        top: -100px;
-        left: 400px;
-      }
-
-      .square {
-        height: 70px;
-        width: 590px;
-        background-color: #949494;
-        position: relative;
-        top: -170px;
-        left: 430px;
-      }
-
-      .circle2 {
-        height: 70px;
-        width: 70px;
-        background-color: #949494;
-        border-radius: 50%;
-        position: relative;
-        top: -240px;
-        left: 980px;
-      }
-
-      p {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-    </style>
     <div class="rectangle"></div>
 
     <div class="circle"></div>
@@ -64,7 +18,7 @@
         height="100"
         width="100"
         alt="Planning"
-        style="position: relative; left: 10px; top: -330px"
+        id="planningPosition"
     /></a>
 
     <a href="https://www.youtube.com/watch?v=4-UbHw8eDzM"
@@ -73,7 +27,7 @@
         height="100"
         width="100"
         alt="Profiel"
-        style="position: relative; left: 125px; top: -330px"
+        id="profielPosition"
     /></a>
 
     <a href="https://www.youtube.com/watch?v=ATkKQ1y4vg"
@@ -82,7 +36,7 @@
         height="100"
         width="100"
         alt="Klas"
-        style="position: relative; left: 925px; top: -330px"
+        id="klasPosition"
     /></a>
 
     <a href="https://www.youtube.com/watch?v=E_DTjqY44kc"
@@ -91,7 +45,7 @@
         height="80"
         width="80"
         alt="Instellingen"
-        style="position: relative; left: 1075px; top: -340px"
+        id="instellingenPosition"
     /></a>
 
     <img
@@ -99,59 +53,17 @@
       height="40"
       width="37"
       alt="Search"
-      style="position: relative; left: 592px; top: -353px"
+      id="searchImagePosition"
     />
 
-    <p style="position: relative; left: 428px; top: -405; font-size: 17px">
-      Zoeken
-    </p>
+    <p id="searchTextPosition">Zoeken</p>
 
-    <p
-      style="
-        color: #ffffff;
-        font-size: 10px;
-        position: relative;
-        left: 39px;
-        top: -395;
-      "
-    >
-      Planning
-    </p>
+    <p id="planningText">Planning</p>
 
-    <p
-      style="
-        color: #ffffff;
-        font-size: 10px;
-        position: relative;
-        left: 265px;
-        top: -416;
-      "
-    >
-      Profiel
-    </p>
+    <p id="profielText">Profiel</p>
 
-    <p
-      style="
-        color: #ffffff;
-        font-size: 10px;
-        position: relative;
-        left: 1174px;
-        top: -438;
-      "
-    >
-      Klas
-    </p>
+    <p id="klasText">Klas</p>
 
-    <p
-      style="
-        color: #ffffff;
-        font-size: 10px;
-        position: relative;
-        left: 1403px;
-        top: -460;
-      "
-    >
-      Instellingen
-    </p>
+    <p id="instellingenText">Instellingen</p>
   </body>
 </html>
