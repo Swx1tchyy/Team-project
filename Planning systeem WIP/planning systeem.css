@@ -11,98 +11,56 @@ body {
   left: -10px;
 }
 
-.circle {
-  height: 70px;
-  width: 70px;
-  background-color: #949494;
-  border-radius: 50%;
-  position: relative;
-  top: -100px;
-  left: 400px;
-}
-
-.square {
-  height: 70px;
-  width: 590px;
-  background-color: #949494;
-  position: relative;
-  top: -170px;
-  left: 430px;
-}
-
-.circle2 {
-  height: 70px;
-  width: 70px;
-  background-color: #949494;
-  border-radius: 50%;
-  position: relative;
-  top: -240px;
-  left: 980px;
-}
-
 p {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 #planningPosition {
   position: relative;
-  left: 10px;
-  top: -330px;
+  left: 20px;
+  top: -119px;
 }
 
 #profielPosition {
   position: relative;
-  left: 125px;
-  top: -330px;
+  left: 100px;
+  top: -117px;
 }
 
 #klasPosition {
   position: relative;
-  left: 925px;
-  top: -330px;
+  left: 980px;
+  top: -117px;
 }
 
 #instellingenPosition {
   position: relative;
   left: 1075px;
-  top: -340px;
-}
-
-#searchImagePosition {
-  position: relative;
-  left: 592px;
-  top: -353px;
-}
-
-#searchTextPosition {
-  position: relative;
-  left: 428px;
-  top: -405;
-  font-size: 17px;
+  top: -128px;
 }
 
 #planningText {
   color: #ffffff;
   font-size: 10px;
   position: relative;
-  left: 39px;
-  top: -395;
+  left: 49px;
+  top: -140px;
 }
 
 #profielText {
   color: #ffffff;
   font-size: 10px;
   position: relative;
-  left: 265px;
-  top: -416;
+  left: 240px;
+  top: -160;
 }
 
 #klasText {
   color: #ffffff;
   font-size: 10px;
   position: relative;
-  left: 1174px;
-  top: -438;
+  left: 1229px;
+  top: -181;
 }
 
 #instellingenText {
@@ -110,5 +68,36 @@ p {
   font-size: 10px;
   position: relative;
   left: 1403px;
-  top: -460;
+  top: -204;
+}
+
+.search-wrapper {
+  display: flex; /* Aligns items in a row */
+  min-width: 0px; /* Minimum width for the search bar */
+  border: 1px solid #ccc; /* Border around the search bar */
+  border-width: 0px;
+  border-radius: 10px; /* Rounded corners */
+  position: relative;
+  left: 370px;
+  top: -295px;
+}
+
+input[type="search"] {
+  flex: 0.45; /* Takes up available space */
+  padding: 20px; /* Space inside the input */
+  border: none; /* No border for the input */
+  border-radius: 10px 0 0 10px; /* Rounded corners on the left */
+}
+
+button {
+  padding: 10px 15px; /* Space inside the button */
+  background-color: #6e6e6e; /* Button color */
+  color: white; /* Text color */
+  border: none; /* No border for the button */
+  border-radius: 0 10px 10px 0; /* Rounded corners on the right */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker color on hover */
 }
