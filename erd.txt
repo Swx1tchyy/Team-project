@@ -1,6 +1,6 @@
 erd
 
-student&docent in 1 users tabel met rollen (student, docent) 
+student&docent in 1 users tabel met rollen (student, docent) (gedaan)
 wachtwoord toevoegen   (gedaan)
 1 op meer relatie vak & opdracht omdraaien   (gedaan)
 vakID toevoegen (primary)   (gedaan)
