@@ -4,11 +4,23 @@ body {
 
 .rectangle {
   height: 110px;
-  width: 1920px;
+  width: 3000px;
   background-color: #000000;
   position: relative;
   top: -10px;
   left: -10px;
+}
+
+.square2 {
+  height: 600px;
+  width: 1200px;
+  background-color: #ffffff;
+  outline: 2px solid black;
+  position: relative;
+  top: -220px;
+  left: 170px;
+  border-radius: 10px;
+  opacity: 1;
 }
 
 p {
@@ -69,6 +81,14 @@ p {
   position: relative;
   left: 1403px;
   top: -204;
+}
+
+#planningSysteemText {
+  color: #000000;
+  position: relative;
+  left: 50px;
+  top: 50px;
+  font-weight: 700;
 }
 
 .search-wrapper {
