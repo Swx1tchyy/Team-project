@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="planningPage.css">
+    <title>Plannen</title>
+</head>
+<body>
+
+    <h1>Tickets voor vak</h1>
+
+    <div class="container">
+       
+        <div class="left-side" id="ticketList">
+            <p class="placeholder">Nog geen tickets toegevoegd...</p>
+        </div>
+
+    
+        <div class="right-side">
+            <form id="ticketForm">
+                <label for="fname">Planning naam:</label>
+                <input type="text" id="fname" name="fname" required>
+
+                <label for="beschrijving">Beschrijving:</label>
+                <input type="text" id="beschrijving" name="beschrijving" required>
+
+                <label for="tijd">Tijds uur:</label>
+                <input type="text" id="tijd" name="tijd" required>
+
+                <input type="submit" value="Toevoegen">
+            </form>
+        </div>
+    </div>
+
+    <script src="planningPage.js"></script>
+</body>
+</html>
