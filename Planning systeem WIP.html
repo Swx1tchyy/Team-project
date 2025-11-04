@@ -1,0 +1,134 @@
+<html lang="nl-NL">
+  <head>
+    <title>Planning systeem</title>
+    <link rel="stylesheet" type="text/css" href="planning systeem.css" />
+  </head>
+  <body>
+    <div class="rectangle"></div>
+
+    <a href="planningPage.html"
+      ><img
+        src="planning.jpg"
+        height="100"
+        width="100"
+        alt="Planning"
+        id="planningPosition"
+    /></a>
+
+    <a href="https://www.youtube.com/watch?v=4-UbHw8eDzM"
+      ><img
+        src="profiel.png"
+        height="100"
+        width="100"
+        alt="Profiel"
+        id="profielPosition"
+    /></a>
+
+    <a href="https://www.youtube.com/watch?v=ATkKQ1y4vg"
+      ><img
+        src="klas.png"
+        height="100"
+        width="100"
+        alt="Klas"
+        id="klasPosition"
+    /></a>
+
+    <a onclick="togglePopup()"
+      ><img
+        src="instellingen.png"
+        height="80"
+        width="80"
+        alt="Instellingen"
+        id="instellingenPosition"
+    /></a>
+
+    <p id="planningText">Planning</p>
+
+    <p id="profielText">Profiel</p>
+
+    <p id="klasText">Klas</p>
+
+    <p id="instellingenText">Instellingen</p>
+
+    <div class="search-wrapper">
+      <input type="search" id="site-search" name="q" placeholder="Zoeken..." />
+      <button type="submit">Zoek</button>
+    </div>
+
+    <div class="square2"></div>
+    <p id="planningSysteemText">Planning systeem</p>
+
+
+
+  
+
+  <div class="overlay" id="popupOverlay">
+    <div class="popup">
+      <button class="sluit-knop" onclick="togglePopup()">✕</button>
+      <h2>Instellingen</h2>
+
+      <div class="instellingen">
+        <input type="checkbox" id="darkmode">
+        <label for="darkmode">Donkere modus</label>
+      </div>
+
+      <div class="instellingen">
+        <input type="checkbox" id="optie2">
+        <label for="optie2">placeholder</label>
+      </div>
+
+      <div class="instellingen">
+        <input type="checkbox" id="optie3">
+        <label for="optie3">placeholder</label>
+      </div>
+
+      <div class="instellingen">
+        <input type="checkbox" id="optie4">
+        <label for="optie4">placeholder</label>
+      </div>
+
+      <div class="feedback">
+        <h3>Feedback voor de site?</h3>
+        <form action="feedback.php" method="post" class="feedback-form">
+          <input type="text" name="message" placeholder="Typ hier" required>
+          <button type="submit">Verzenden</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePopup() {
+      document.getElementById('popupOverlay').classList.toggle('active');
+    }
+    
+  function togglePopup() {
+    document.getElementById('popupOverlay').classList.toggle('active');
+  }
+
+  
+  const darkModeCheckbox = document.getElementById('darkmode');
+
+  darkModeCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+    }
+  });
+
+  
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'enabled') {
+      document.body.classList.add('dark-mode');
+      darkModeCheckbox.checked = true;
+    }
+  });
+
+
+  </script>
+  </body>
+</html>

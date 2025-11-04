@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plannen (Offline)</title>
+  <link rel="stylesheet" href="planningPage.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .left-side {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .right-side {
+      width: 300px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+    .ticket {
+      background: #f2f2f2;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .delete-btn, .edit-btn {
+      position: absolute;
+      top: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: white;
+    }
+    .delete-btn {
+      right: 10px;
+      background: #e74c3c;
+    }
+    .edit-btn {
+      right: 80px;
+      background: #3498db;
+    }
+    .delete-btn:hover {
+      background: #c0392b;
+    }
+    .edit-btn:hover {
+      background: #2980b9;
+    }
+    input, label {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input[type="submit"] {
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    input[type="submit"]:hover {
+      background: #219150;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 15px;
+      text-decoration: none;
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Terug naar hoofdmenu</a>
+  <h1>Offline Planning Systeem</h1>
+
+  <div class="container">
+    <div class="left-side" id="ticketList">
+      <p class="placeholder">Nog geen tickets toegevoegd...</p>
+    </div>
+
+    <div class="right-side">
+      <form id="ticketForm">
+        <label for="fname">Planning naam:</label>
+        <input type="text" id="fname" name="fname" required />
+
+        <label for="beschrijving">Beschrijving:</label>
+        <input type="text" id="beschrijving" name="beschrijving" required />
+
+        <label for="tijd">Tijds uur:</label>
+        <input type="text" id="tijd" name="tijd" required />
+
+        <input type="submit" value="Toevoegen" />
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('ticketForm');
+    const ticketList = document.getElementById('ticketList');
+
+   
+    let planning = JSON.parse(localStorage.getItem('planning')) || [];
+
+    function savePlanning() {
+      localStorage.setItem('planning', JSON.stringify(planning));
+    }
+
+    function renderTickets() {
+      ticketList.innerHTML = '';
+      if (planning.length === 0) {
+        ticketList.innerHTML = '<p class="placeholder">Nog geen tickets toegevoegd...</p>';
+        return;
+      }
+      planning.forEach((t) => {
+        const ticket = document.createElement('div');
+        ticket.classList.add('ticket');
+        ticket.dataset.id = t.id;
+        ticket.innerHTML = `
+          <button class="edit-btn">Bewerken</button>
+          <button class="delete-btn">Verwijderen</button>
+          <h3>${t.naam}</h3>
+          <p><strong>Beschrijving:</strong> ${t.beschrijving}</p>
+          <p><strong>Tijd:</strong> ${t.tijd}</p>
+        `;
+        ticketList.appendChild(ticket);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const naam = document.getElementById('fname').value.trim();
+      const beschrijving = document.getElementById('beschrijving').value.trim();
+      const tijd = document.getElementById('tijd').value.trim();
+
+      if (!naam || !beschrijving || !tijd) return;
+
+      const newTicket = {
+        id: Date.now(),
+        naam,
+        beschrijving,
+        tijd,
+      };
+
+      planning.unshift(newTicket);
+      savePlanning();
+      renderTickets();
+      form.reset();
+    });
+
+    ticketList.addEventListener('click', (e) => {
+      const ticketDiv = e.target.closest('.ticket');
+      if (!ticketDiv) return;
+      const id = Number(ticketDiv.dataset.id);
+
+      if (e.target.classList.contains('delete-btn')) {
+        if (confirm('Weet je zeker dat je dit ticket wilt verwijderen?')) {
+          planning = planning.filter((t) => t.id !== id);
+          savePlanning();
+          renderTickets();
+        }
+      }
+
+      if (e.target.classList.contains('edit-btn')) {
+        const ticket = planning.find((t) => t.id === id);
+        if (!ticket) return;
+        const newNaam = prompt('Nieuwe naam:', ticket.naam);
+        const newBeschrijving = prompt('Nieuwe beschrijving:', ticket.beschrijving);
+        const newTijd = prompt('Nieuwe tijd:', ticket.tijd);
+        if (!newNaam || !newBeschrijving || !newTijd) return;
+        ticket.naam = newNaam;
+        ticket.beschrijving = newBeschrijving;
+        ticket.tijd = newTijd;
+        savePlanning();
+        renderTickets();
+      }
+    });
+    
+    renderTickets();
+  </script>
+</body>
+</html>
+

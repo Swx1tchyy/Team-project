@@ -1,0 +1,260 @@
+body {
+  background-color: #ffffff;
+}
+
+.rectangle {
+  height: 110px;
+  width: 3000px;
+  background-color: #000000;
+  position: relative;
+  top: -10px;
+  left: -10px;
+}
+
+.square2 {
+  height: 600px;
+  width: 1200px;
+  background-color: #ffffff;
+  outline: 2px solid black;
+  position: relative;
+  top: -220px;
+  left: 170px;
+  border-radius: 10px;
+  opacity: 1;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#planningPosition {
+  position: relative;
+  left: 20px;
+  top: -119px;
+}
+
+#profielPosition {
+  position: relative;
+  left: 100px;
+  top: -117px;
+}
+
+#klasPosition {
+  position: relative;
+  left: 980px;
+  top: -117px;
+}
+
+#instellingenPosition {
+  position: relative;
+  left: 1075px;
+  top: -128px;
+  cursor: pointer;
+}
+
+#planningText {
+  color: #ffffff;
+  font-size: 10px;
+  position: relative;
+  left: 49px;
+  top: -140px;
+}
+
+#profielText {
+  color: #ffffff;
+  font-size: 10px;
+  position: relative;
+  left: 240px;
+  top: -160;
+}
+
+#klasText {
+  color: #ffffff;
+  font-size: 10px;
+  position: relative;
+  left: 1229px;
+  top: -181;
+}
+
+#instellingenText {
+  color: #ffffff;
+  font-size: 10px;
+  position: relative;
+  left: 1403px;
+  top: -204;
+}
+
+#planningSysteemText {
+  color: #000000;
+  position: relative;
+  left: 50px;
+  top: 50px;
+  font-weight: 700;
+}
+
+.search-wrapper {
+  display: flex; /* Aligns items in a row */
+  min-width: 0px; /* Minimum width for the search bar */
+  border: 1px solid #ccc; /* Border around the search bar */
+  border-width: 0px;
+  border-radius: 10px; /* Rounded corners */
+  position: relative;
+  left: 370px;
+  top: -295px;
+}
+
+input[type="search"] {
+  flex: 0.45; /* Takes up available space */
+  padding: 20px; /* Space inside the input */
+  border: none; /* No border for the input */
+  border-radius: 10px 0 0 10px; /* Rounded corners on the left */
+}
+
+button {
+  padding: 10px 15px; /* Space inside the button */
+  background-color: #6e6e6e; /* Button color */
+  color: white; /* Text color */
+  border: none; /* No border for the button */
+  border-radius: 0 10px 10px 0; /* Rounded corners on the right */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
+
+/* instellingen*/
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  background: #eee;
+  border-radius: 15px;
+  width: 600px;
+  padding: 40px;
+  position: relative;
+  
+}
+
+.popup h2 {
+  text-align: center;
+  margin-top: 0;
+  font-family: Verdana, sans-serif;
+}
+
+.popup button {
+  color: #000;
+}
+.feedback h3 {
+  font-family: Verdana, sans-serif;
+}
+
+.sluit-knop {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #000;
+}
+
+.instellingen {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-family: Verdana, sans-serif;
+  font-size: 18px;
+}
+
+input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  border-radius: 6px;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+.feedback {
+  text-align: center;
+  margin-top: 30px;
+  
+}
+
+.feedback input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-family: Verdana, sans-serif;
+  font-size: 16px;
+}
+
+.feedback-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feedback-form input {
+  flex: 1;       
+  min-width: 0;
+}
+
+.feedback-form button {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 15px;
+  border: 2px solid #606060;
+  font-family: Verdana, sans-serif;
+  background: none;
+  cursor: pointer;
+  margin-top: 0; 
+}
+.feedback-form button:hover {
+  background-color: #ccc;
+}
+
+body.dark-mode {
+  background: #121212;
+  color: #fff;
+}
+
+body.dark-mode .popup {
+  background: #222;
+  color: #fff;
+}
+
+body.dark-mode input[type="text"] {
+  background: #333;
+  color: #fff;
+  border-color: #7a7a7a;
+}
+
+body.dark-mode button {
+  color: #fff;
+}
