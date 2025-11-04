@@ -1,6 +1,0 @@
-erd
-
-student&docent in 1 users tabel met rollen (student, docent) 
-wachtwoord toevoegen
-1 op meer relatie vak & opdracht omdraaien
-vakID toevoegen (primary)
