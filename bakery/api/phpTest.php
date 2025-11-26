@@ -1,16 +1,39 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 header("Content-Type: application/json");
 
-// Bericht uitlezen
-$data = json_decode(file_get_contents("php://input"), true);
-
-if (!isset($data["message"])) {
-    echo json_encode(["response" => "Geen bericht ontvangen."]);
+// Preflight (CORS)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
     exit;
 }
 
-// Simpele antwoord generator (werkt altijd)
-$userMessage = $data["message"];
-$botResponse = "Je zei: " . $userMessage;
+// Alleen POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['response' => 'Methode niet toegestaan']);
+    exit;
+}
 
-echo json_encode(["response" => $botResponse]);
+// Input veilig uitlezen
+$raw = file_get_contents('php://input');
+$data = json_decode($raw, true);
+
+if (!is_array($data) || !isset($data['message'])) {
+    echo json_encode(['response' => 'Geen bericht ontvangen']);
+    exit;
+}
+
+$userMessage = trim($data['message']);
+
+// Voorbeeld antwoord
+$userMessageLower = strtolower($userMessage);
+if (strpos($userMessageLower, 'hallo') !== false) {
+    $reply = "Hallo! Hoe kan ik je helpen?";
+} else {
+    $reply = "Ik heb je bericht ontvangen: \"$userMessage\".";
+}
+
+// JSON terugsturen
+echo json_encode(['response' => $reply]);

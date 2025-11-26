@@ -1,4 +1,3 @@
-// DOM elements
 const messagesContainer = document.getElementById('messagesContainer');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
@@ -11,7 +10,6 @@ const closeIcon = chatToggle.querySelector('.close-icon');
 let isTyping = false;
 let isOpen = false;
 
-// Toggle widget open/close
 chatToggle.addEventListener('click', () => {
     isOpen = !isOpen;
     chatbotWrapper.style.display = isOpen ? 'block' : 'none';
@@ -19,7 +17,6 @@ chatToggle.addEventListener('click', () => {
     closeIcon.style.display = isOpen ? 'block' : 'none';
 });
 
-// Minimize
 minimizeBtn.addEventListener('click', () => {
     chatbotWrapper.style.display = 'none';
     chatIcon.style.display = 'block';
@@ -27,47 +24,41 @@ minimizeBtn.addEventListener('click', () => {
     isOpen = false;
 });
 
-// Auto expand textarea
 messageInput.addEventListener('input', () => {
     messageInput.style.height = 'auto';
     messageInput.style.height = messageInput.scrollHeight + 'px';
-    sendButton.disabled = !messageInput.value.trim() || isTyping;
 });
 
-// Enter = send
+messageInput.value = "Zijn er voedsel dat allergieën bevatten?";
+sendButton.disabled = false;
+
 messageInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        sendMessage();
+        sendUserMessage();
     }
 });
 
-sendButton.addEventListener('click', sendMessage);
+sendButton.addEventListener('click', sendUserMessage);
 
-// Send message
-function sendMessage() {
+function sendUserMessage() {
     const text = messageInput.value.trim();
-    if (!text || isTyping) return;
+    if (!text) return;
 
     addMessage(text, 'user');
+
     messageInput.value = '';
-    messageInput.style.height = 'auto';
     sendButton.disabled = true;
 
     showTypingIndicator();
 
-    sendMessageToBackend(text)
-        .then(res => {
-            hideTypingIndicator();
-            addMessage(res, 'bot');
-        })
-        .catch(err => {
-            hideTypingIndicator();
-            addMessage("Server error. Please try again.", "bot");
-        });
+    setTimeout(() => {
+        hideTypingIndicator();
+        const botReply = "Ja, onze voedsel kunnen sporen van noten en melk bevatten. Als je een allergie hebt laat het aan onze medewerkers weten!";
+        addMessage(botReply, 'bot');
+    }, 1000);
 }
 
-// Add a message to the screen
 function addMessage(text, sender) {
     const wrapper = document.createElement('div');
     wrapper.className = `message-wrapper ${sender}`;
@@ -102,25 +93,15 @@ function addMessage(text, sender) {
 
     wrapper.appendChild(message);
     messagesContainer.appendChild(wrapper);
-
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Typing indicator
 function showTypingIndicator() {
     isTyping = true;
-    sendButton.disabled = true;
-
     const wrapper = document.createElement('div');
     wrapper.className = "message-wrapper bot";
     wrapper.id = "typingIndicator";
-
-    wrapper.innerHTML = `
-        <div class="typing-indicator">
-            <span></span><span></span><span></span>
-        </div>
-    `;
-
+    wrapper.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
     messagesContainer.appendChild(wrapper);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
@@ -128,28 +109,13 @@ function showTypingIndicator() {
 function hideTypingIndicator() {
     isTyping = false;
     document.getElementById('typingIndicator')?.remove();
-    sendButton.disabled = !messageInput.value.trim();
 }
 
-// Get current time
+// Huidige tijd
 function getCurrentTime() {
     const now = new Date();
     return now.toLocaleTimeString("nl-NL", {
         hour: "2-digit",
         minute: "2-digit"
     });
-}
-
-// SERVER CONNECTION — THIS IS THE IMPORTANT PART
-async function sendMessageToBackend(message) {
-    const response = await fetch("api/chat.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message })
-    });
-
-    const data = await response.json();
-    return data.response; 
 }
