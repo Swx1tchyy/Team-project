@@ -10,13 +10,15 @@ const closeIcon = chatToggle.querySelector('.close-icon');
 let isTyping = false;
 let isOpen = false;
 
+// Open/close chatbot
 chatToggle.addEventListener('click', () => {
     isOpen = !isOpen;
-    chatbotWrapper.style.display = isOpen ? 'block' : 'none';
+    chatbotWrapper.style.display = isOpen ? 'flex' : 'none';
     chatIcon.style.display = isOpen ? 'none' : 'block';
     closeIcon.style.display = isOpen ? 'block' : 'none';
 });
 
+// Minimaliseer chatbot
 minimizeBtn.addEventListener('click', () => {
     chatbotWrapper.style.display = 'none';
     chatIcon.style.display = 'block';
@@ -24,14 +26,14 @@ minimizeBtn.addEventListener('click', () => {
     isOpen = false;
 });
 
+// Automatisch hoogte aanpassen
 messageInput.addEventListener('input', () => {
     messageInput.style.height = 'auto';
     messageInput.style.height = messageInput.scrollHeight + 'px';
+    sendButton.disabled = !messageInput.value.trim();
 });
 
-messageInput.value = "Zijn er voedsel dat allergieën bevatten?";
-sendButton.disabled = false;
-
+// Verstuur bericht bij enter
 messageInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -41,24 +43,7 @@ messageInput.addEventListener('keydown', (e) => {
 
 sendButton.addEventListener('click', sendUserMessage);
 
-function sendUserMessage() {
-    const text = messageInput.value.trim();
-    if (!text) return;
-
-    addMessage(text, 'user');
-
-    messageInput.value = '';
-    sendButton.disabled = true;
-
-    showTypingIndicator();
-
-    setTimeout(() => {
-        hideTypingIndicator();
-        const botReply = "Ja, onze voedsel kunnen sporen van noten en melk bevatten. Als je een allergie hebt laat het aan onze medewerkers weten!";
-        addMessage(botReply, 'bot');
-    }, 1000);
-}
-
+// Bericht toevoegen aan chat
 function addMessage(text, sender) {
     const wrapper = document.createElement('div');
     wrapper.className = `message-wrapper ${sender}`;
@@ -96,6 +81,7 @@ function addMessage(text, sender) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
+// Typing indicator
 function showTypingIndicator() {
     isTyping = true;
     const wrapper = document.createElement('div');
@@ -119,3 +105,51 @@ function getCurrentTime() {
         minute: "2-digit"
     });
 }
+
+// --- Vraag-antwoord flow ---
+const questions = [
+    "Zijn er voedsel dat allergieën bevatten?",
+    "Hoe moet je iemand rapporteren?"
+];
+
+const answers = [
+    "Ja, onze voedsel kunnen sporen van noten en melk bevatten. Als je een allergie hebt laat het aan onze medewerkers weten!",
+    "Als je iemand wilt rapporteren kan je ons online een bericht sturen of kan je bij de receptie het aanmelden."
+];
+
+let currentIndex = 0;
+
+// Functie om de volgende vraag in de inputbalk te zetten
+function showNextQuestion() {
+    if (currentIndex >= questions.length) {
+        messageInput.value = "";
+        sendButton.disabled = true;
+        return;
+    }
+    messageInput.value = questions[currentIndex];
+    sendButton.disabled = false;
+    messageInput.focus();
+}
+
+// Functie die wordt uitgevoerd als de gebruiker op Enter klikt
+function sendUserMessage() {
+    const text = messageInput.value.trim();
+    if (!text) return;
+
+    addMessage(text, 'user');
+    messageInput.value = '';
+    sendButton.disabled = true;
+
+    showTypingIndicator();
+    setTimeout(() => {
+        hideTypingIndicator();
+        addMessage(answers[currentIndex], 'bot');
+        currentIndex++;
+        showNextQuestion(); // Zet de volgende vraag in de inputbalk
+    }, 1000);
+}
+
+// Start de flow bij het laden van de pagina
+window.addEventListener('load', () => {
+    showNextQuestion();
+});
