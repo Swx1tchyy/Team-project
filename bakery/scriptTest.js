@@ -43,7 +43,6 @@ messageInput.addEventListener('keydown', (e) => {
 
 sendButton.addEventListener('click', sendUserMessage);
 
-// Bericht toevoegen aan chat
 function addMessage(text, sender) {
     const wrapper = document.createElement('div');
     wrapper.className = `message-wrapper ${sender}`;
@@ -81,7 +80,6 @@ function addMessage(text, sender) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Typing indicator
 function showTypingIndicator() {
     isTyping = true;
     const wrapper = document.createElement('div');
@@ -97,7 +95,6 @@ function hideTypingIndicator() {
     document.getElementById('typingIndicator')?.remove();
 }
 
-// Huidige tijd
 function getCurrentTime() {
     const now = new Date();
     return now.toLocaleTimeString("nl-NL", {
@@ -106,20 +103,26 @@ function getCurrentTime() {
     });
 }
 
-// --- Vraag-antwoord flow ---
+// zet vragen hier
 const questions = [
     "Zijn er voedsel dat allergieën bevatten?",
-    "Hoe moet je iemand rapporteren?"
+    "Hoe moet je iemand rapporteren?",
+    "Hoe werkt de koffiemachine?",
+    "Hoe laat moet ik uit checken?",
+    "Hebben jullie reservaties voor grootte groepen?"
+
 ];
 
 const answers = [
     "Ja, onze voedsel kunnen sporen van noten en melk bevatten. Als je een allergie hebt laat het aan onze medewerkers weten!",
-    "Als je iemand wilt rapporteren kan je ons online een bericht sturen of kan je bij de receptie het aanmelden."
+    "Als je iemand wilt rapporteren kan je ons online een bericht sturen of kan je bij de receptie het aanmelden.",
+    "Zet een beker in de koffiemachine en klik op het scherm en selecteer wat voor soort coffee u wilt.",
+    "Het restaurant sluit om 8 uur in week dagen en 10 uur op weekends. Zorg ervoor dat u een half uur eerder uitcheckt.",
+    "Ja natuurlijk! Het maximum voor een persoon die komt met een groep is 12 personen inclusief uzelf."
 ];
 
 let currentIndex = 0;
 
-// Functie om de volgende vraag in de inputbalk te zetten
 function showNextQuestion() {
     if (currentIndex >= questions.length) {
         messageInput.value = "";
@@ -131,7 +134,6 @@ function showNextQuestion() {
     messageInput.focus();
 }
 
-// Functie die wordt uitgevoerd als de gebruiker op Enter klikt
 function sendUserMessage() {
     const text = messageInput.value.trim();
     if (!text) return;
@@ -145,11 +147,10 @@ function sendUserMessage() {
         hideTypingIndicator();
         addMessage(answers[currentIndex], 'bot');
         currentIndex++;
-        showNextQuestion(); // Zet de volgende vraag in de inputbalk
+        showNextQuestion();
     }, 1000);
 }
 
-// Start de flow bij het laden van de pagina
 window.addEventListener('load', () => {
     showNextQuestion();
 });
