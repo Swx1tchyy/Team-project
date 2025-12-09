@@ -10,7 +10,6 @@ const closeIcon = chatToggle.querySelector('.close-icon');
 let isTyping = false;
 let isOpen = false;
 
-// Open/close chatbot
 chatToggle.addEventListener('click', () => {
     isOpen = !isOpen;
     chatbotWrapper.style.display = isOpen ? 'flex' : 'none';
@@ -18,7 +17,6 @@ chatToggle.addEventListener('click', () => {
     closeIcon.style.display = isOpen ? 'block' : 'none';
 });
 
-// Minimaliseer chatbot
 minimizeBtn.addEventListener('click', () => {
     chatbotWrapper.style.display = 'none';
     chatIcon.style.display = 'block';
@@ -26,14 +24,12 @@ minimizeBtn.addEventListener('click', () => {
     isOpen = false;
 });
 
-// Automatisch hoogte aanpassen
 messageInput.addEventListener('input', () => {
     messageInput.style.height = 'auto';
     messageInput.style.height = messageInput.scrollHeight + 'px';
     sendButton.disabled = !messageInput.value.trim();
 });
 
-// Verstuur bericht bij enter
 messageInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
